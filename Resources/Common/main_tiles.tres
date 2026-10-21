@@ -1,0 +1,52 @@
+[gd_resource type="TileSet" format=3 uid="uid://dflqef88pgl6c"]
+
+[ext_resource type="Texture2D" uid="uid://bx22shmccss6j" path="res://Assets/Sprites/Environments/spr_tile_main.png" id="1_x58e3"]
+[ext_resource type="PackedScene" uid="uid://bx3u68kfbf7gg" path="res://Scenes/Game/Common/hazard.tscn" id="2_7dgjs"]
+[ext_resource type="PackedScene" uid="uid://7oma6onj76f8" path="res://Scenes/Game/Common/switch.tscn" id="3_85i2l"]
+[ext_resource type="Texture2D" uid="uid://cew087vhg347g" path="res://Assets/Sprites/Environments/spr_tile_bg.png" id="4_netay"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3wyah"]
+texture = ExtResource("1_x58e3")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+1:1/0 = 0
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_85i2l"]
+resource_name = "Hazard"
+scenes/1/scene = ExtResource("2_7dgjs")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_netay"]
+resource_name = "Switch"
+scenes/1/scene = ExtResource("3_85i2l")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sxlec"]
+texture = ExtResource("4_netay")
+0:0/0 = 0
+0:0/0/probability = 0.5
+1:0/0 = 0
+1:0/0/probability = 0.25
+2:0/0 = 0
+2:0/0/probability = 0.25
+3:0/0 = 0
+3:0/0/probability = 0.25
+
+[resource]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_3wyah")
+sources/1 = SubResource("TileSetScenesCollectionSource_85i2l")
+sources/2 = SubResource("TileSetScenesCollectionSource_netay")
+sources/3 = SubResource("TileSetAtlasSource_sxlec")

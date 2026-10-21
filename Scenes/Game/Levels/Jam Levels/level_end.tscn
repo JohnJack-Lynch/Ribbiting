@@ -1,0 +1,61 @@
+[gd_scene format=4 uid="uid://chtn8nuqhhu8o"]
+
+[ext_resource type="Script" uid="uid://bj74kmv015783" path="res://Scenes/Game/Common/Scripts/level.gd" id="1_s2hf8"]
+[ext_resource type="TileSet" uid="uid://dflqef88pgl6c" path="res://Resources/Common/main_tiles.tres" id="2_v78ca"]
+[ext_resource type="Texture2D" uid="uid://bxoxiaiyqtptb" path="res://Assets/Sprites/spr_thanks.png" id="3_0vkpt"]
+[ext_resource type="PackedScene" uid="uid://5ull6trhjdm7" path="res://Scenes/Game/Actors/player.tscn" id="3_xoeqx"]
+[ext_resource type="PackedScene" uid="uid://cnkknyhx6gmle" path="res://Scenes/Game/Actors/mean_frog.tscn" id="4_77ebc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2hf8"]
+atlas = ExtResource("3_0vkpt")
+region = Rect2(0, 0, 136, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v78ca"]
+atlas = ExtResource("3_0vkpt")
+region = Rect2(137, 0, 136, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ivuhx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2hf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v78ca")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="LevelEnd" type="Node2D" unique_id=1390404401]
+script = ExtResource("1_s2hf8")
+win_zone_pos = Vector2(176, 128)
+metadata/_custom_type_script = "uid://bj74kmv015783"
+metadata/_edit_vertical_guides_ = [176.0]
+metadata/_edit_horizontal_guides_ = [128.0]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2093083493]
+tile_map_data = PackedByteArray("AAAAAAQAAwABAAAAAAAAAAUAAwABAAAAAAAAAAYAAwAAAAAAAAABAAIAAwACAAAAAAACAAAAAwACAAAAAAACAAMAAwAAAAAAAAACAAgAAwAAAAAAAAADAAIAAwACAAAAAAADAAMAAwADAAAAAAADAAQAAwAAAAAAAAAEAAAAAwACAAAAAAAEAAMAAwACAAAAAAAEAAcAAwAAAAAAAAAFAAEAAwAAAAAAAAAFAAYAAwACAAAAAAAFAAcAAwAAAAAAAAAGAAEAAwACAAAAAAAGAAcAAwABAAAAAAAHAAYAAwACAAAAAAAHAAcAAwAAAAAAAAAIAAIAAwAAAAAAAAAIAAQAAwACAAAAAAAIAAUAAwADAAAAAAAJAAAAAwAAAAAAAAAJAAcAAwADAAAAAAAKAAAAAwAAAAAAAAALAAEAAwACAAAAAAALAAYAAwADAAAAAAA=")
+tile_set = ExtResource("2_v78ca")
+
+[node name="Player" parent="." unique_id=318612519 instance=ExtResource("3_xoeqx")]
+position = Vector2(120, 88)
+active = true
+
+[node name="Player2" parent="." unique_id=799711137 instance=ExtResource("3_xoeqx")]
+position = Vector2(24, 120)
+active = true
+
+[node name="MeanFrog" parent="." unique_id=1782510675 instance=ExtResource("4_77ebc")]
+position = Vector2(152, 24)
+active = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=416156663]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer" unique_id=562222315]
+z_index = 1
+position = Vector2(96, 40)
+sprite_frames = SubResource("SpriteFrames_ivuhx")
+autoplay = "default"
+frame_progress = 0.3623374

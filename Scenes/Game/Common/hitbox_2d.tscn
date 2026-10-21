@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b5e2rnew3e7c5"]
+
+[ext_resource type="Script" uid="uid://fhaccwnl2atq" path="res://Scenes/Game/Common/Scripts/hitbox_2d.gd" id="1_sifgi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmck1"]
+
+[node name="Hitbox2D" type="Area2D" unique_id=53690351]
+script = ExtResource("1_sifgi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1493892172]
+shape = SubResource("RectangleShape2D_jmck1")
+debug_color = Color(1, 0, 0, 0.41960785)

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bmlro6hq43d0c"]
+
+[ext_resource type="PackedScene" uid="uid://5ull6trhjdm7" path="res://Scenes/Game/Actors/player.tscn" id="1_cb2sq"]
+[ext_resource type="PackedScene" uid="uid://cnkknyhx6gmle" path="res://Scenes/Game/Actors/mean_frog.tscn" id="2_mi1ya"]
+
+[node name="Test" type="Node2D" unique_id=246476583]
+
+[node name="Frog1" parent="." unique_id=318612519 instance=ExtResource("1_cb2sq")]
+position = Vector2(40, 8)
+override_priority = 2
+tween_time = 0.17
+
+[node name="Frog3" parent="." unique_id=627311523 instance=ExtResource("1_cb2sq")]
+position = Vector2(72, 72)
+active = true
+tween_time = 0.17
+
+[node name="MeanFrog" parent="." unique_id=1782510675 instance=ExtResource("2_mi1ya")]
+position = Vector2(104, 72)
+active = true
+override_priority = 2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1331406484]
+visible = false
+color = Color(0, 0, 0, 1)

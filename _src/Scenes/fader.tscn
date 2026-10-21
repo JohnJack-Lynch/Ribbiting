@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://02yarysa7xic"]
+
+[ext_resource type="Script" uid="uid://c7xojkx6pydw7" path="res://_src/Scenes/Scripts/fader.gd" id="1_61ilq"]
+[ext_resource type="Shader" uid="uid://crmwfyh27uv5" path="res://Assets/Shaders/transitions.gdshader" id="2_wkqyd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61ilq"]
+shader = ExtResource("2_wkqyd")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 2
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/invert = false
+shader_parameter/grid_size = Vector2(1, 1)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/global_x_mirror = false
+shader_parameter/global_y_mirror = false
+shader_parameter/local_x_mirror = false
+shader_parameter/local_y_mirror = false
+shader_parameter/stagger = Vector2(0, 0)
+shader_parameter/cumulative_stagger_flip = false
+shader_parameter/cumulative_stagger = Vector2(0, 0)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 0.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(100, 100)
+shader_parameter/edges = 64
+shader_parameter/shape_feather = 0.0
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 2.0
+shader_parameter/progress_bias = Vector2(0, 0)
+
+[sub_resource type="Animation" id="Animation_wkqyd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+
+[sub_resource type="Animation" id="Animation_cj6ld"]
+resource_name = "WipeIn"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.28717458, 2.0000005),
+"update": 0,
+"values": [2.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_aoo0d"]
+resource_name = "WipeOut"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 1.1),
+"transitions": PackedFloat32Array(0.28717458, 2.0000005),
+"update": 0,
+"values": [0.0, 2.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ot2dc"]
+_data = {
+&"RESET": SubResource("Animation_wkqyd"),
+&"WipeIn": SubResource("Animation_cj6ld"),
+&"WipeOut": SubResource("Animation_aoo0d")
+}
+
+[node name="Fader" type="CanvasLayer" unique_id=2086678444]
+layer = 13
+script = ExtResource("1_61ilq")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=491646977]
+material = SubResource("ShaderMaterial_61ilq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.078431375, 0.0627451, 0.07450981, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=652967104]
+libraries/ = SubResource("AnimationLibrary_ot2dc")

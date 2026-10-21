@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c16slr4scdi2g"]
+
+[ext_resource type="Texture2D" uid="uid://bocsd7k2xgq04" path="res://Assets/Sprites/Environments/spr_blockade.png" id="1_ej32p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7schq"]
+size = Vector2(16, 16)
+
+[node name="Rock" type="StaticBody2D" unique_id=666286791]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=680424391]
+texture = ExtResource("1_ej32p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=782912715]
+shape = SubResource("RectangleShape2D_7schq")
+debug_color = Color(0.7554421, 0.45485723, 0, 0.41960785)

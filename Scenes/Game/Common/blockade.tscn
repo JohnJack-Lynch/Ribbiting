@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ckdytsohonanu"]
+
+[ext_resource type="Script" uid="uid://cmlloechaceqm" path="res://Scenes/Game/Common/Scripts/blockade.gd" id="1_6lex1"]
+[ext_resource type="PackedScene" uid="uid://c16slr4scdi2g" path="res://Scenes/Game/Common/rock.tscn" id="2_qe38y"]
+[ext_resource type="PackedScene" uid="uid://ctjtehl7ggrhf" path="res://Scenes/Game/Actors/poof_effect.tscn" id="3_gqxpy"]
+
+[node name="Blockade" type="Node2D" unique_id=657562444]
+script = ExtResource("1_6lex1")
+block = ExtResource("2_qe38y")
+poof = ExtResource("3_gqxpy")
+metadata/_edit_group_ = true

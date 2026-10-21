@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bx3u68kfbf7gg"]
+
+[ext_resource type="Script" uid="uid://bsq365xihv0eq" path="res://Scenes/Game/Common/Scripts/hazard.gd" id="1_od7v0"]
+[ext_resource type="Texture2D" uid="uid://nhs8eldlwr44" path="res://Assets/Sprites/Environments/spr_tile_hazard.png" id="2_1jp2r"]
+[ext_resource type="AudioStream" uid="uid://d2cy1iso82jot" path="res://Assets/Audio/SFX/snd_kill.wav" id="3_wahsd"]
+[ext_resource type="PackedScene" uid="uid://ctjtehl7ggrhf" path="res://Scenes/Game/Actors/poof_effect.tscn" id="4_xwcw0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7schq"]
+size = Vector2(16, 16)
+
+[sub_resource type="Gradient" id="Gradient_5agm6"]
+offsets = PackedFloat32Array(0, 0.42771083)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_od7v0"]
+gradient = SubResource("Gradient_5agm6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Hazard" type="Area2D" unique_id=1629372270]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_od7v0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=838778729]
+texture = ExtResource("2_1jp2r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1014922295]
+shape = SubResource("RectangleShape2D_7schq")
+debug_color = Color(0.9953061, 0, 0.21541578, 0.41960785)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=525174175]
+texture = SubResource("GradientTexture2D_od7v0")
+
+[node name="KillSnd" type="AudioStreamPlayer2D" parent="." unique_id=840506381]
+stream = ExtResource("3_wahsd")
+
+[node name="Poof" parent="." unique_id=463090495 instance=ExtResource("4_xwcw0")]
+visible = false

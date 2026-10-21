@@ -1,0 +1,94 @@
+[gd_scene format=4 uid="uid://btfpj4ruvj2cy"]
+
+[ext_resource type="Script" uid="uid://bj74kmv015783" path="res://Scenes/Game/Common/Scripts/level.gd" id="1_kybcq"]
+[ext_resource type="TileSet" uid="uid://dflqef88pgl6c" path="res://Resources/Common/main_tiles.tres" id="2_ev5fy"]
+[ext_resource type="PackedScene" uid="uid://msg3tbu0a0ff" path="res://Scenes/Game/Common/croak_switch.tscn" id="3_gaom2"]
+[ext_resource type="PackedScene" uid="uid://7oma6onj76f8" path="res://Scenes/Game/Common/switch.tscn" id="3_sw5au"]
+[ext_resource type="PackedScene" uid="uid://oc2a0u878py2" path="res://Scenes/Game/Common/tilemap_switch.tscn" id="4_6orkp"]
+[ext_resource type="PackedScene" uid="uid://ckdytsohonanu" path="res://Scenes/Game/Common/blockade.tscn" id="4_e54s3"]
+[ext_resource type="PackedScene" uid="uid://c16slr4scdi2g" path="res://Scenes/Game/Common/rock.tscn" id="5_6orkp"]
+[ext_resource type="Script" uid="uid://ykd14b4b4dbk" path="res://Scenes/Game/Common/Scripts/blockade_manager.gd" id="6_e54s3"]
+[ext_resource type="Script" uid="uid://dx21fgyl04gif" path="res://Scenes/Game/Common/Scripts/tilemap_toggler.gd" id="9_hqhd7"]
+[ext_resource type="PackedScene" uid="uid://cnkknyhx6gmle" path="res://Scenes/Game/Actors/mean_frog.tscn" id="10_6e7tm"]
+[ext_resource type="AudioStream" uid="uid://b0v8t8hung456" path="res://Assets/Audio/SFX/snd_toggle.wav" id="11_o4gnf"]
+[ext_resource type="PackedScene" uid="uid://5ull6trhjdm7" path="res://Scenes/Game/Actors/player.tscn" id="11_q3pky"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_agv7h"]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("11_o4gnf")
+
+[node name="Level14" type="Node2D" unique_id=1954127408]
+script = ExtResource("1_kybcq")
+next_level_uid = "uid://s6dmwqwxwfal"
+player_spawn = Vector2(160, 16)
+win_zone_pos = Vector2(16, 64)
+metadata/_custom_type_script = "uid://bj74kmv015783"
+metadata/_edit_horizontal_guides_ = [16.0, 64.0]
+metadata/_edit_vertical_guides_ = [160.0, 16.0]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1425074552]
+tile_map_data = PackedByteArray("AAADAAIAAAABAAEAAAADAAMAAAABAAEAAAADAAQAAAABAAEAAAADAAUAAAABAAEAAAADAAYAAAABAAEAAAAEAAMAAAABAAEAAAAEAAQAAAABAAEAAAAEAAUAAAABAAEAAAAFAAMAAAABAAEAAAAFAAQAAAABAAEAAAAFAAUAAAABAAEAAAAGAAMAAAABAAEAAAAGAAQAAAABAAEAAAAJAAEAAAABAAEAAAAJAAIAAAABAAEAAAAJAAMAAAABAAEAAAAJAAQAAAABAAEAAAAJAAUAAAABAAEAAAAJAAYAAAABAAEAAAAJAAcAAAABAAEAAAAKAAEAAAABAAEAAAAKAAIAAAABAAEAAAAKAAMAAAABAAEAAAAKAAQAAAABAAEAAAAKAAUAAAABAAEAAAAKAAYAAAABAAEAAAAGAAUAAAABAAEAAAAHAAUAAAABAAEAAAAHAAMAAAABAAEAAAAJAAAAAAABAAAAAAAKAAAAAAABAAAAAAAJAAgAAAABAAIAAAAKAAgAAAABAAIAAAALAAEAAAACAAEAAAALAAIAAAACAAEAAAALAAMAAAACAAEAAAALAAQAAAACAAEAAAALAAUAAAACAAEAAAALAAYAAAACAAEAAAALAAcAAAACAAEAAAAIAAEAAAAAAAEAAAAIAAIAAAAAAAEAAAAIAAMAAAAAAAEAAAAIAAQAAAAAAAEAAAAIAAUAAAAAAAEAAAAIAAYAAAAAAAEAAAAIAAcAAAAAAAEAAAAHAAYAAAABAAIAAAAGAAcAAAABAAIAAAAFAAYAAAABAAIAAAAEAAYAAAABAAIAAAADAAcAAAABAAIAAAACAAIAAAAAAAEAAAACAAMAAAAAAAEAAAACAAQAAAAAAAEAAAACAAUAAAAAAAEAAAACAAYAAAAAAAEAAAADAAEAAAABAAAAAAAEAAIAAAABAAAAAAAFAAIAAAABAAAAAAAGAAEAAAABAAAAAAAHAAIAAAABAAAAAAAHAAQAAAACAAEAAAA=")
+tile_set = ExtResource("2_ev5fy")
+
+[node name="TileMapLayer3" type="TileMapLayer" parent="." unique_id=1607340409]
+tile_map_data = PackedByteArray("AAADAAIAAAABAAEAAAADAAMAAAABAAEAAAADAAQAAAABAAEAAAADAAUAAAABAAEAAAADAAYAAAABAAEAAAAEAAMAAAABAAEAAAAEAAQAAAABAAEAAAAEAAUAAAABAAEAAAAFAAMAAAABAAEAAAAFAAQAAAABAAEAAAAFAAUAAAABAAEAAAAGAAMAAAABAAEAAAAGAAQAAAABAAEAAAAJAAEAAAABAAEAAAAJAAIAAAABAAEAAAAJAAMAAAABAAEAAAAJAAQAAAABAAEAAAAJAAUAAAABAAEAAAAJAAYAAAABAAEAAAAJAAcAAAABAAEAAAAKAAEAAAABAAEAAAAKAAIAAAABAAEAAAAKAAMAAAABAAEAAAAKAAQAAAABAAEAAAAKAAUAAAABAAEAAAAKAAYAAAABAAEAAAAGAAUAAAABAAEAAAAHAAUAAAABAAEAAAAHAAMAAAABAAEAAAAJAAAAAAABAAAAAAAKAAAAAAABAAAAAAAJAAgAAAABAAIAAAAKAAgAAAABAAIAAAALAAEAAAACAAEAAAALAAIAAAACAAEAAAALAAMAAAACAAEAAAALAAQAAAACAAEAAAALAAUAAAACAAEAAAALAAYAAAACAAEAAAALAAcAAAACAAEAAAAIAAEAAAAAAAEAAAAIAAIAAAAAAAEAAAAIAAMAAAAAAAEAAAAIAAQAAAAAAAEAAAAIAAUAAAAAAAEAAAAIAAYAAAAAAAEAAAAIAAcAAAAAAAEAAAAHAAYAAAABAAIAAAAGAAcAAAABAAIAAAAFAAYAAAABAAIAAAAEAAYAAAABAAIAAAADAAcAAAABAAIAAAACAAIAAAAAAAEAAAACAAMAAAABAAAAAAACAAQAAAABAAEAAAACAAUAAAABAAIAAAACAAYAAAAAAAEAAAADAAEAAAABAAAAAAAEAAIAAAABAAAAAAAFAAIAAAABAAAAAAAGAAEAAAABAAAAAAAHAAIAAAABAAAAAAABAAMAAAABAAAAAAAAAAQAAAAAAAEAAAABAAUAAAABAAIAAAAHAAQAAAACAAEAAAA=")
+tile_set = ExtResource("2_ev5fy")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=84109443]
+tile_map_data = PackedByteArray("AAABAAcAAwADAAAAAAACAAAAAwABAAAAAAACAAIAAwACAAAAAAACAAMAAwAAAAAAAAACAAQAAwABAAAAAAADAAEAAwAAAAAAAAADAAIAAwABAAAAAAADAAQAAwADAAAAAAADAAYAAwABAAAAAAADAAcAAwADAAAAAAAEAAQAAwABAAAAAAAFAAAAAwABAAAAAAAFAAIAAwABAAAAAAAFAAMAAwACAAAAAAAFAAgAAwAAAAAAAAAGAAMAAwADAAAAAAAGAAUAAwAAAAAAAAAGAAcAAwAAAAAAAAAHAAAAAwABAAAAAAAHAAEAAwABAAAAAAAHAAYAAwABAAAAAAAHAAgAAwADAAAAAAAIAAEAAwABAAAAAAAIAAIAAwAAAAAAAAAIAAgAAwAAAAAAAAAJAAgAAwAAAAAAAAAKAAAAAwAAAAAAAAAKAAMAAwACAAAAAAAKAAUAAwACAAAAAAALAAMAAwABAAAAAAALAAQAAwADAAAAAAALAAcAAwAAAAAAAAA=")
+tile_set = ExtResource("2_ev5fy")
+
+[node name="MeanFrog" parent="." unique_id=1782510675 instance=ExtResource("10_6e7tm")]
+position = Vector2(120, 88)
+
+[node name="Player" parent="." unique_id=318612519 instance=ExtResource("11_q3pky")]
+position = Vector2(120, 56)
+
+[node name="Switch" parent="." unique_id=812250973 instance=ExtResource("3_sw5au")]
+position = Vector2(104, 40)
+pressure_senstive = true
+
+[node name="Switch2" parent="." unique_id=1441638844 instance=ExtResource("3_sw5au")]
+position = Vector2(104, 104)
+pressure_senstive = true
+
+[node name="CroakSwitch" parent="." unique_id=2019649247 instance=ExtResource("3_gaom2")]
+position = Vector2(56, 136)
+
+[node name="CroakSwitch2" parent="." unique_id=844506530 instance=ExtResource("3_gaom2")]
+position = Vector2(56, 8)
+
+[node name="TilemapSwitch" parent="." unique_id=1579442568 instance=ExtResource("4_6orkp")]
+position = Vector2(168, 120)
+
+[node name="Blockade" parent="." unique_id=657562444 instance=ExtResource("4_e54s3")]
+position = Vector2(144, 96)
+blockade_length = 2
+
+[node name="Rock" parent="Blockade" unique_id=666286791 instance=ExtResource("5_6orkp")]
+position = Vector2(8, 8)
+
+[node name="@StaticBody2D@148801" parent="Blockade" unique_id=2035817139 instance=ExtResource("5_6orkp")]
+position = Vector2(24, 8)
+
+[node name="BlockadeController" type="Node" parent="." unique_id=31736805 node_paths=PackedStringArray("blockade")]
+script = ExtResource("6_e54s3")
+blockade = NodePath("../Blockade")
+metadata/_custom_type_script = "uid://ykd14b4b4dbk"
+
+[node name="ToggleSnd" type="AudioStreamPlayer2D" parent="BlockadeController" unique_id=742380396]
+stream = SubResource("AudioStreamRandomizer_agv7h")
+volume_db = -1.315
+bus = &"SFX"
+
+[node name="TilemapToggler" type="Node" parent="." unique_id=307374844 node_paths=PackedStringArray("base_tilemap", "target_tilemap", "trigger")]
+script = ExtResource("9_hqhd7")
+base_tilemap = NodePath("../TileMapLayer")
+target_tilemap = NodePath("../TileMapLayer3")
+trigger = NodePath("../TilemapSwitch")
+metadata/_custom_type_script = "uid://dx21fgyl04gif"
+
+[node name="ToggleSnd" type="AudioStreamPlayer2D" parent="TilemapToggler" unique_id=1751129033]
+stream = SubResource("AudioStreamRandomizer_agv7h")
+volume_db = -1.315

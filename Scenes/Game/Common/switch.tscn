@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://7oma6onj76f8"]
+
+[ext_resource type="Script" uid="uid://o5egb6tfw7em" path="res://Scenes/Game/Common/Scripts/switch.gd" id="1_w5fw5"]
+[ext_resource type="Texture2D" uid="uid://csn5yrmhd4rct" path="res://Assets/Sprites/Environments/spr_button.png" id="2_bg8ew"]
+[ext_resource type="AudioStream" uid="uid://boyhrp0x1elxs" path="res://Assets/Audio/SFX/snd_switch_press.wav" id="3_vxt4e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7schq"]
+size = Vector2(16, 16)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vxt4e"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("3_vxt4e")
+
+[node name="Switch" type="Area2D" unique_id=812250973 groups=["Switches"]]
+z_index = -1
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_w5fw5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1879787301]
+texture = ExtResource("2_bg8ew")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2026135105]
+shape = SubResource("RectangleShape2D_7schq")
+
+[node name="PressSnd" type="AudioStreamPlayer2D" parent="." unique_id=1546700110]
+stream = SubResource("AudioStreamRandomizer_vxt4e")
+volume_db = 1.375
+bus = &"SFX"

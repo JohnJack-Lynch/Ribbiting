@@ -1,0 +1,465 @@
+[gd_scene format=3 uid="uid://cnkknyhx6gmle"]
+
+[ext_resource type="Script" uid="uid://b2ycipxsgbuif" path="res://Scenes/Game/Actors/Scripts/player.gd" id="1_1ro4c"]
+[ext_resource type="Texture2D" uid="uid://bmi6ruxciapvm" path="res://Assets/Sprites/Characters/spr_frog_mean.png" id="2_f80dg"]
+[ext_resource type="PackedScene" uid="uid://dy08bbmynm4o8" path="res://Scenes/Game/Common/echo_ring_m.tscn" id="2_jhy3l"]
+[ext_resource type="Script" uid="uid://donj8fxvegd43" path="res://_util/sprite_flipper_2d.gd" id="3_po2y6"]
+[ext_resource type="AudioStream" uid="uid://ct42ejgmfcgyg" path="res://Assets/Audio/SFX/snd_hop.wav" id="4_po2y6"]
+[ext_resource type="AudioStream" uid="uid://chw032dkqfqbu" path="res://Assets/Audio/SFX/snd_croak.wav" id="5_11awk"]
+
+[sub_resource type="Gradient" id="Gradient_5agm6"]
+offsets = PackedFloat32Array(0, 0.6927711)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_11awk"]
+gradient = SubResource("Gradient_5agm6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhy3l"]
+size = Vector2(8, 8)
+
+[sub_resource type="Animation" id="Animation_mgrlc"]
+resource_name = "Croak"
+length = 0.4
+tracks/0/type = "animation"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SprAnimationPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": PackedStringArray("Croak"),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_ring"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xkm73"]
+resource_name = "Hop"
+length = 0.185
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667),
+"transitions": PackedFloat32Array(0.34151012, 1, 1),
+"update": 0,
+"values": [Vector2(0, -3), Vector2(0, -10.365), Vector2(0, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_02jef"]
+resource_name = "Idle"
+length = 2.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1333333, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.075), Vector2(1, 1)]
+}
+tracks/1/type = "animation"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SprAnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": PackedStringArray("Idle"),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ryasx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -3)]
+}
+
+[sub_resource type="Animation" id="Animation_53845"]
+resource_name = "Snooze"
+length = 2.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1333333, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 0.955), Vector2(1, 1)]
+}
+tracks/1/type = "animation"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SprAnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": PackedStringArray("Snooze"),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_khw60"]
+resource_name = "WakeUp"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668),
+"transitions": PackedFloat32Array(0.5358867, 0),
+"update": 0,
+"values": [Vector2(1.12, 0.905), Vector2(1, 1)]
+}
+tracks/1/type = "animation"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SprAnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": PackedStringArray("WakeUp"),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.26666668),
+"transitions": PackedFloat32Array(1, 0),
+"update": 0,
+"values": [Vector2(0, -3), Vector2(0, -3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f80dg"]
+_data = {
+&"Croak": SubResource("Animation_mgrlc"),
+&"Hop": SubResource("Animation_xkm73"),
+&"Idle": SubResource("Animation_02jef"),
+&"RESET": SubResource("Animation_ryasx"),
+&"Snooze": SubResource("Animation_53845"),
+&"WakeUp": SubResource("Animation_khw60")
+}
+
+[sub_resource type="Animation" id="Animation_m4yhv"]
+resource_name = "Blink"
+length = 1.0000100149013105
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3, 0.4, 0.79999995, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_8dgkj"]
+resource_name = "Croak"
+length = 0.40000668752864
+step = 0.06666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_5agm6"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_wkxp7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_vao4o"]
+resource_name = "Snooze"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+
+[sub_resource type="Animation" id="Animation_xtns2"]
+resource_name = "WakeUp"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [11, 12, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"switch_state"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"ActiveFrog", false],
+"method": &"add_to_group"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yqnnb"]
+_data = {
+&"Blink": SubResource("Animation_m4yhv"),
+&"Croak": SubResource("Animation_8dgkj"),
+&"Idle": SubResource("Animation_5agm6"),
+&"RESET": SubResource("Animation_wkxp7"),
+&"Snooze": SubResource("Animation_vao4o"),
+&"WakeUp": SubResource("Animation_xtns2")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqnnb"]
+size = Vector2(8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fpvp0"]
+radius = 48.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_11awk"]
+random_pitch = 1.1553527
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("4_po2y6")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0iv2a"]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("5_11awk")
+
+[node name="MeanFrog" type="CharacterBody2D" unique_id=1782510675 node_paths=PackedStringArray("anim", "sprite", "spr_flip", "buffer_box", "croak_box", "blink_timer") groups=["Frog"]]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_1ro4c")
+is_mean = true
+echo_effect = ExtResource("2_jhy3l")
+anim = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite2D")
+spr_flip = NodePath("SpriteFlipper2D")
+buffer_box = NodePath("BufferBox")
+croak_box = NodePath("CroakBox")
+blink_timer = NodePath("BlinkTimer")
+metadata/_custom_type_script = "uid://b2ycipxsgbuif"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1980159011]
+texture_filter = 1
+texture = ExtResource("2_f80dg")
+offset = Vector2(0, -3)
+hframes = 13
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D" unique_id=31517816]
+position = Vector2(0, -4)
+texture = SubResource("GradientTexture2D_11awk")
+
+[node name="SpriteFlipper2D" type="Node" parent="." unique_id=636287526 node_paths=PackedStringArray("char", "sprite")]
+script = ExtResource("3_po2y6")
+char = NodePath("..")
+sprite = NodePath("../Sprite2D")
+offset = true
+metadata/_custom_type_script = "uid://donj8fxvegd43"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2104284291]
+shape = SubResource("RectangleShape2D_jhy3l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1106896038]
+libraries/ = SubResource("AnimationLibrary_f80dg")
+autoplay = &"Idle"
+next/Croak = &"Idle"
+
+[node name="SprAnimationPlayer" type="AnimationPlayer" parent="." unique_id=851037645]
+libraries/ = SubResource("AnimationLibrary_yqnnb")
+next/Blink = &"Idle"
+next/Croak = &"Idle"
+
+[node name="UpCast" type="RayCast2D" parent="." unique_id=1823375947]
+position = Vector2(0, -8)
+target_position = Vector2(0, -8)
+collision_mask = 3
+hit_from_inside = true
+
+[node name="RightCast" type="RayCast2D" parent="." unique_id=100836273]
+position = Vector2(8, 0)
+target_position = Vector2(8, 0)
+collision_mask = 3
+hit_from_inside = true
+
+[node name="DownCast" type="RayCast2D" parent="." unique_id=1233115607]
+position = Vector2(0, 8)
+target_position = Vector2(0, 8)
+collision_mask = 3
+hit_from_inside = true
+
+[node name="LeftCast" type="RayCast2D" parent="." unique_id=472717218]
+position = Vector2(-8, 0)
+target_position = Vector2(-8, 0)
+collision_mask = 3
+hit_from_inside = true
+
+[node name="BufferBox" type="Area2D" parent="." unique_id=1174155474]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BufferBox" unique_id=1586079665]
+shape = SubResource("RectangleShape2D_yqnnb")
+
+[node name="CroakBox" type="Area2D" parent="." unique_id=1462781541]
+collision_layer = 0
+collision_mask = 34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CroakBox" unique_id=376287053]
+shape = SubResource("CircleShape2D_fpvp0")
+debug_color = Color(0.19140324, 0.64220166, 3.85046e-07, 0.41960785)
+
+[node name="BlinkTimer" type="Timer" parent="." unique_id=1659345892]
+wait_time = 4.0
+
+[node name="HopSnd" type="AudioStreamPlayer2D" parent="." unique_id=1093243069]
+stream = SubResource("AudioStreamRandomizer_11awk")
+bus = &"SFX"
+
+[node name="CroakSnd" type="AudioStreamPlayer2D" parent="." unique_id=534742065]
+stream = SubResource("AudioStreamRandomizer_0iv2a")
+volume_db = 1.855
+bus = &"SFX"

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cepydja7totc7"]
+
+[ext_resource type="Texture2D" uid="uid://csc7raaatn1kp" path="res://Assets/Sprites/spr_green_ring.png" id="1_4x7ma"]
+[ext_resource type="Script" uid="uid://cbjxtjbbr7fmk" path="res://Scenes/Game/Common/Scripts/echo_ring.gd" id="2_dy5eh"]
+
+[node name="EchoRingG" type="Sprite2D" unique_id=748049298]
+modulate = Color(1, 1, 1, 0.49803922)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_4x7ma")
+script = ExtResource("2_dy5eh")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1995131240]
+texture = ExtResource("1_4x7ma")

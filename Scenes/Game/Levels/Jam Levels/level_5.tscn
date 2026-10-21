@@ -1,0 +1,68 @@
+[gd_scene format=4 uid="uid://wc373iwct64e"]
+
+[ext_resource type="Script" uid="uid://bj74kmv015783" path="res://Scenes/Game/Common/Scripts/level.gd" id="1_jll1i"]
+[ext_resource type="TileSet" uid="uid://dflqef88pgl6c" path="res://Resources/Common/main_tiles.tres" id="2_k7q0q"]
+[ext_resource type="PackedScene" uid="uid://7oma6onj76f8" path="res://Scenes/Game/Common/switch.tscn" id="3_i2gpe"]
+[ext_resource type="PackedScene" uid="uid://ckdytsohonanu" path="res://Scenes/Game/Common/blockade.tscn" id="4_4mb06"]
+[ext_resource type="PackedScene" uid="uid://c16slr4scdi2g" path="res://Scenes/Game/Common/rock.tscn" id="5_6n4l0"]
+[ext_resource type="Script" uid="uid://ykd14b4b4dbk" path="res://Scenes/Game/Common/Scripts/blockade_manager.gd" id="6_5frir"]
+[ext_resource type="PackedScene" uid="uid://5ull6trhjdm7" path="res://Scenes/Game/Actors/player.tscn" id="7_6n4l0"]
+[ext_resource type="AudioStream" uid="uid://b0v8t8hung456" path="res://Assets/Audio/SFX/snd_toggle.wav" id="8_5frir"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xf540"]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("8_5frir")
+
+[node name="Level5" type="Node2D" unique_id=1189176124]
+script = ExtResource("1_jll1i")
+next_level_uid = "uid://nqh0y4102i33"
+player_spawn = Vector2(80, 64)
+win_zone_pos = Vector2(80, 16)
+metadata/_custom_type_script = "uid://bj74kmv015783"
+metadata/_edit_horizontal_guides_ = [64.0, 16.0]
+metadata/_edit_vertical_guides_ = [80.0]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1796911066]
+tile_map_data = PackedByteArray("AAAEAAIAAAABAAEAAAAEAAMAAAABAAEAAAAEAAQAAAABAAEAAAAEAAUAAAABAAEAAAAFAAMAAAABAAEAAAAFAAQAAAABAAEAAAAFAAUAAAABAAEAAAAGAAIAAAABAAEAAAAGAAMAAAABAAEAAAAGAAQAAAABAAEAAAAGAAUAAAABAAEAAAAIAAMAAAABAAEAAAAIAAUAAAABAAEAAAAIAAYAAAABAAEAAAAIAAcAAAABAAEAAAAEAAEAAAABAAEAAAAEAAcAAAABAAEAAAAFAAIAAAABAAEAAAAFAAcAAAABAAEAAAAGAAEAAAABAAEAAAAGAAcAAAABAAEAAAAHAAcAAAABAAEAAAAIAAIAAAABAAEAAAAFAAYAAAABAAEAAAAEAAYAAAAAAAEAAAAGAAYAAAACAAEAAAAHAAYAAAABAAAAAAAHAAUAAAACAAEAAAAHAAQAAAACAAEAAAAHAAMAAAACAAEAAAAHAAIAAAACAAEAAAAHAAEAAAACAAEAAAAJAAIAAAACAAEAAAAJAAMAAAACAAEAAAAJAAQAAAACAAEAAAAJAAUAAAACAAEAAAAJAAYAAAACAAEAAAAJAAcAAAACAAEAAAAIAAgAAAABAAIAAAAHAAgAAAABAAIAAAAGAAgAAAABAAIAAAAFAAgAAAABAAIAAAAEAAgAAAABAAIAAAADAAcAAAAAAAEAAAADAAUAAAAAAAEAAAADAAQAAAAAAAEAAAADAAMAAAAAAAEAAAADAAIAAAAAAAEAAAADAAEAAAAAAAEAAAAEAAAAAAABAAAAAAAGAAAAAAABAAAAAAAIAAEAAAABAAAAAAA=")
+tile_set = ExtResource("2_k7q0q")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=1315526029]
+tile_map_data = PackedByteArray("AAAAAAIAAwACAAAAAAAAAAcAAwADAAAAAAABAAMAAwACAAAAAAABAAQAAwADAAAAAAACAAAAAwACAAAAAAACAAYAAwABAAAAAAADAAEAAwADAAAAAAADAAQAAwACAAAAAAAEAAAAAwACAAAAAAAEAAUAAwABAAAAAAAFAAIAAwACAAAAAAAFAAgAAwABAAAAAAAGAAAAAwAAAAAAAAAGAAQAAwABAAAAAAAGAAUAAwABAAAAAAAHAAcAAwABAAAAAAAIAAYAAwAAAAAAAAAJAAAAAwAAAAAAAAAJAAQAAwAAAAAAAAAKAAAAAwAAAAAAAAAKAAQAAwAAAAAAAAAKAAYAAwACAAAAAAAKAAgAAwABAAAAAAA=")
+tile_set = ExtResource("2_k7q0q")
+
+[node name="Player" parent="." unique_id=318612519 instance=ExtResource("7_6n4l0")]
+position = Vector2(88, 104)
+
+[node name="Switch" parent="." unique_id=812250973 instance=ExtResource("3_i2gpe")]
+position = Vector2(136, 72)
+pressure_senstive = true
+
+[node name="Blockade" parent="." unique_id=657562444 instance=ExtResource("4_4mb06")]
+position = Vector2(48, 32)
+blockade_length = 5
+
+[node name="Rock" parent="Blockade" unique_id=666286791 instance=ExtResource("5_6n4l0")]
+position = Vector2(8, 8)
+
+[node name="@StaticBody2D@53382" parent="Blockade" unique_id=1179804 instance=ExtResource("5_6n4l0")]
+position = Vector2(24, 8)
+
+[node name="@StaticBody2D@53383" parent="Blockade" unique_id=97760896 instance=ExtResource("5_6n4l0")]
+position = Vector2(40, 8)
+
+[node name="@StaticBody2D@53384" parent="Blockade" unique_id=1315701054 instance=ExtResource("5_6n4l0")]
+position = Vector2(56, 8)
+
+[node name="@StaticBody2D@53385" parent="Blockade" unique_id=876034884 instance=ExtResource("5_6n4l0")]
+position = Vector2(72, 8)
+
+[node name="BlockadeController" type="Node" parent="." unique_id=1241121837 node_paths=PackedStringArray("blockade")]
+script = ExtResource("6_5frir")
+blockade = NodePath("../Blockade")
+metadata/_custom_type_script = "uid://ykd14b4b4dbk"
+
+[node name="ToggleSnd" type="AudioStreamPlayer2D" parent="BlockadeController" unique_id=887025709]
+stream = SubResource("AudioStreamRandomizer_xf540")
+volume_db = -1.315
+bus = &"SFX"

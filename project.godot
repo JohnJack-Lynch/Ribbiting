@@ -1,0 +1,57 @@
+config_version=5
+
+[application]
+
+config/name="Ribbiting (Jam ver.)"
+config/tags=PackedStringArray("game_jam", "released")
+run/main_scene="uid://crh1erkfw5spn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/bg_color=Color(0.1254902, 0.15686275, 0.26666668, 1)
+boot_splash/image="uid://djxrc261twjkq"
+config/icon="uid://d1ifulus5q7w0"
+
+[audio]
+
+buses/default_bus_layout="uid://bevwpxgfi7e2k"
+
+[autoload]
+
+SignalBus="*uid://ctfcl011h4fih"
+Fader="*uid://02yarysa7xic"
+
+[display]
+
+window/size/viewport_width=192
+window/size/viewport_height=144
+window/size/window_width_override=960
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+
+[global_group]
+
+ActiveFrog=""
+Switches=""
+Frog=""
+
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="ActiveFrog"
+2d_physics/layer_3="WinZone"
+2d_physics/layer_4="Hazard"
+2d_physics/layer_5="Switch"
+2d_physics/layer_6="CroakSwitch"
+2d_physics/layer_7="BufferBox"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0.023529412, 0.023529412, 0.03137255, 1)

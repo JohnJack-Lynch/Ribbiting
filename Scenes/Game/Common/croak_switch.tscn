@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://msg3tbu0a0ff"]
+
+[ext_resource type="Script" uid="uid://o5egb6tfw7em" path="res://Scenes/Game/Common/Scripts/switch.gd" id="1_4hhog"]
+[ext_resource type="Texture2D" uid="uid://bopvvueqh7k78" path="res://Assets/Sprites/Environments/spr_croakswitch.png" id="2_4hhog"]
+[ext_resource type="AudioStream" uid="uid://boyhrp0x1elxs" path="res://Assets/Audio/SFX/snd_switch_press.wav" id="3_fqdyt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qcr03"]
+size = Vector2(16, 16)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8i1it"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("3_fqdyt")
+
+[sub_resource type="Gradient" id="Gradient_02jef"]
+offsets = PackedFloat32Array(0, 0.6927711)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4hhog"]
+gradient = SubResource("Gradient_02jef")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="CroakSwitch" type="Area2D" unique_id=2019649247 node_paths=PackedStringArray("light") groups=["Switches"]]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_4hhog")
+light = NodePath("PointLight2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1335913281]
+texture = ExtResource("2_4hhog")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=830286224]
+shape = SubResource("RectangleShape2D_qcr03")
+
+[node name="PressSnd" type="AudioStreamPlayer2D" parent="." unique_id=1460661328]
+stream = SubResource("AudioStreamRandomizer_8i1it")
+volume_db = 1.375
+bus = &"SFX"
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1211535459]
+enabled = false
+texture = SubResource("GradientTexture2D_4hhog")
