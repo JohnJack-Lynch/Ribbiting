@@ -155,6 +155,7 @@ autoplay = "default"
 frame_progress = 0.8361592
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer2" unique_id=26888916]
+visible = false
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0

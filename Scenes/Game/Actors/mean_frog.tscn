@@ -373,6 +373,7 @@ stream_0/stream = ExtResource("5_11awk")
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_1ro4c")
+mode = 1
 is_mean = true
 echo_effect = ExtResource("2_jhy3l")
 anim = NodePath("AnimationPlayer")

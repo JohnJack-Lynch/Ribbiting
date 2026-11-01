@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bq3le42xme3i0"]
+
+[ext_resource type="Script" uid="uid://crnpe4t4j8gu" path="res://Scenes/UI/Menus/Components/Scripts/map_route.gd" id="1_owpth"]
+
+[node name="MapRoute" type="Path2D" unique_id=1338425931]
+script = ExtResource("1_owpth")

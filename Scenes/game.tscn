@@ -62,6 +62,10 @@ preprocess = 10.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_wrm1d")
 
+[node name="Camera2D" type="Camera2D" parent="World" unique_id=1767962208]
+offset = Vector2(96, 72)
+editor_draw_limits = true
+
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=2097572928]
 
 [node name="HUDRoot" type="Control" parent="HUDLayer" unique_id=2079898679]

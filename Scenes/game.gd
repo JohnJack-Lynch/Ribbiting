@@ -21,8 +21,9 @@ const WIN_ZONE_SCENE_UID : String = "uid://mtc50o1t6q8f"
 #const MAIN_MENU_SCENE_UID : String = "uid://crh1erkfw5spn"
 const LEVEL_1_SCENE_UID : String = "uid://oey1hsl1xs8b"
 
-const MAIN_MENU_SCENE_UID : String = "uid://crh1erkfw5spn"
-const END_SCENE_UID : String = ""
+const WORLD_MAP_SCENE_UID : String = "uid://cugjaqj7ne4li"
+
+#const END_SCENE_UID : String = ""
 
 @onready var level_root: Node2D = $World/LevelRoot
 @onready var entity_root: Node2D = $World/EntityRoot
@@ -50,7 +51,7 @@ func _ready() -> void:
 	SignalBus.refresh_level.connect(_on_refresh_level)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_focus_next"):
+	if Input.is_action_just_pressed("RIB_RESET") and !Fader.animation_player.is_playing():
 		SignalBus.refresh_level.emit()
 
 func init_player() -> void:

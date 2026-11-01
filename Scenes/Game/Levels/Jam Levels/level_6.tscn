@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://7oma6onj76f8" path="res://Scenes/Game/Common/switch.tscn" id="3_wouw4"]
 [ext_resource type="PackedScene" uid="uid://bx3u68kfbf7gg" path="res://Scenes/Game/Common/hazard.tscn" id="4_1tem3"]
 [ext_resource type="PackedScene" uid="uid://oc2a0u878py2" path="res://Scenes/Game/Common/tilemap_switch.tscn" id="4_y0865"]
+[ext_resource type="Script" uid="uid://bsq365xihv0eq" path="res://Scenes/Game/Common/Scripts/hazard.gd" id="7_ek48i"]
 [ext_resource type="Script" uid="uid://ykd14b4b4dbk" path="res://Scenes/Game/Common/Scripts/blockade_manager.gd" id="7_youlh"]
 [ext_resource type="PackedScene" uid="uid://5ull6trhjdm7" path="res://Scenes/Game/Actors/player.tscn" id="8_youlh"]
 [ext_resource type="AudioStream" uid="uid://b0v8t8hung456" path="res://Assets/Audio/SFX/snd_toggle.wav" id="9_thcaq"]
@@ -57,23 +58,23 @@ flip_collision = true
 layer = 4
 mask = 2
 
-[node name="Hazard" parent="Blockade" unique_id=1629372270 instance=ExtResource("4_1tem3")]
-visible = false
+[node name="Hazard" type="Area2D" parent="Blockade" unique_id=1629372270 instance=ExtResource("4_1tem3")]
 position = Vector2(8, 8)
-collision_layer = 0
-collision_mask = 0
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("7_ek48i")
 
-[node name="@Area2D@36828" parent="Blockade" unique_id=686929879 instance=ExtResource("4_1tem3")]
-visible = false
+[node name="@Area2D@96020" type="Area2D" parent="Blockade" unique_id=1068856771 instance=ExtResource("4_1tem3")]
 position = Vector2(24, 8)
-collision_layer = 0
-collision_mask = 0
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("7_ek48i")
 
-[node name="@Area2D@36829" parent="Blockade" unique_id=328368241 instance=ExtResource("4_1tem3")]
-visible = false
+[node name="@Area2D@96021" type="Area2D" parent="Blockade" unique_id=1425007906 instance=ExtResource("4_1tem3")]
 position = Vector2(40, 8)
-collision_layer = 0
-collision_mask = 0
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("7_ek48i")
 
 [node name="Player" parent="." unique_id=318612519 instance=ExtResource("8_youlh")]
 position = Vector2(56, 24)

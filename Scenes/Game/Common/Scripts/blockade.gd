@@ -63,11 +63,11 @@ func create_blockade() -> void:
 		#poof_inst.owner = get_tree().edited_scene_root
 		
 		if blockade_direction == Orientation.HORIZONTAL:
-			inst.position = (Vector2(float(i), 0) * TILE_SIZE) + BLOCK_OFFSET
+			inst.global_position = global_position + ((Vector2(float(i), 0) * TILE_SIZE) + BLOCK_OFFSET)
 			#poof_inst.position = (Vector2(float(i), 0) * TILE_SIZE) + BLOCK_OFFSET
 		
 		if blockade_direction == Orientation.VERTICAL:
-			inst.position = (Vector2(0, float(i)) * TILE_SIZE) + BLOCK_OFFSET
+			inst.global_position = global_position + ((Vector2(0, float(i)) * TILE_SIZE) + BLOCK_OFFSET)
 			#poof_inst.position = (Vector2(0, float(i)) * TILE_SIZE) + BLOCK_OFFSET
 		
 	

@@ -44,7 +44,9 @@ func _on_press(body : Node2D) -> void:
 		if body is Player:
 			if body.spr_pos_tween:
 				await body.spr_pos_tween.finished
-			press(true)
+			
+			if pressed == false:
+				press(true)
 			#pressed = true
 			#press_snd.play()
 			#print("pressed")

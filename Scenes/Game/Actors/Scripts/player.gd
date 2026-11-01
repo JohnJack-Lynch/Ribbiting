@@ -4,17 +4,22 @@ extends CharacterBody2D
 enum States {
 	ACTIVE,
 	CROAK,
-	SNOOZE
+	SNOOZE,
+	WIN
 }
 
-@export var variant : Texture2D
+#enum FrogMode {
+	#BASIC,
+	#MEAN
+#}
 
+#@export var mode : FrogMode
 @export var is_mean : bool = false
 @export var active : bool = false
 
 @export_group("Overrides")
 @export var entry_state : States
-
+@export var hop_dist : int = 1
 @export var override_priority : int
 @export var tween_time : float = 0.185
 
@@ -59,9 +64,6 @@ func _ready() -> void:
 	
 	#croak_box.set_deferred("monitoring", false)
 	
-	if variant:
-		sprite.texture = variant
-	
 	anim.animation_finished.connect(_on_anim_finished)
 	
 	if override_priority != 0:
@@ -84,23 +86,23 @@ func _physics_process(delta: float) -> void:
 			
 			if is_mean:
 				if !spr_pos_tween or !spr_pos_tween.is_running():
-					if Input.is_action_just_pressed("ui_up") and down_cast.is_colliding() == false:
+					if Input.is_action_just_pressed("RIB_UP") and down_cast.is_colliding() == false:
 						
 						
 						
 						movement(Vector2.DOWN)
-					elif Input.is_action_just_pressed("ui_right") and left_cast.is_colliding() == false:
+					elif Input.is_action_just_pressed("RIB_RIGHT") and left_cast.is_colliding() == false:
 						if is_mean:
 							sprite.flip_h = true
 						else:
 							sprite.flip_h = false
 						
 						movement(Vector2.LEFT)
-					elif Input.is_action_just_pressed("ui_down") and up_cast.is_colliding() == false:
+					elif Input.is_action_just_pressed("RIB_DOWN") and up_cast.is_colliding() == false:
 						
 						
 						movement(Vector2.UP)
-					elif Input.is_action_just_pressed("ui_left") and right_cast.is_colliding() == false:
+					elif Input.is_action_just_pressed("RIB_LEFT") and right_cast.is_colliding() == false:
 						if is_mean:
 							sprite.flip_h = false
 						else:
@@ -111,23 +113,23 @@ func _physics_process(delta: float) -> void:
 						anim.play("Idle")
 			else:
 				if !spr_pos_tween or !spr_pos_tween.is_running():
-					if Input.is_action_just_pressed("ui_up") and up_cast.is_colliding() == false:
+					if Input.is_action_just_pressed("RIB_UP") and up_cast.is_colliding() == false:
 						
 						
 						
 						movement(Vector2.UP)
-					elif Input.is_action_just_pressed("ui_right") and right_cast.is_colliding() == false:
+					elif Input.is_action_just_pressed("RIB_RIGHT") and right_cast.is_colliding() == false:
 						if is_mean:
 							sprite.flip_h = true
 						else:
 							sprite.flip_h = false
 						
 						movement(Vector2.RIGHT)
-					elif Input.is_action_just_pressed("ui_down") and down_cast.is_colliding() == false:
+					elif Input.is_action_just_pressed("RIB_DOWN") and down_cast.is_colliding() == false:
 						
 						
 						movement(Vector2.DOWN)
-					elif Input.is_action_just_pressed("ui_left") and left_cast.is_colliding() == false:
+					elif Input.is_action_just_pressed("RIB_LEFT") and left_cast.is_colliding() == false:
 						if is_mean:
 							sprite.flip_h = false
 						else:
@@ -137,7 +139,7 @@ func _physics_process(delta: float) -> void:
 					else:
 						anim.play("Idle")
 			
-			if Input.is_action_just_pressed("ui_accept"):
+			if Input.is_action_just_pressed("RIB_CROAK"):
 				switch_state(States.CROAK)
 			
 			
@@ -153,19 +155,21 @@ func _physics_process(delta: float) -> void:
 			
 			if awoken == false:
 				anim.play("Snooze")
+		States.WIN:
+			pass
 	
 	#if active == true:
 		#if !spr_pos_tween or !spr_pos_tween.is_running():
-			#if Input.is_action_just_pressed("ui_up") and up_cast.is_colliding() == false:
+			#if Input.is_action_just_pressed("RIB_UP") and up_cast.is_colliding() == false:
 				#movement(Vector2.UP)
-			#elif Input.is_action_just_pressed("ui_right") and right_cast.is_colliding() == false:
+			#elif Input.is_action_just_pressed("RIB_RIGHT") and right_cast.is_colliding() == false:
 				#movement(Vector2.RIGHT)
-			#elif Input.is_action_just_pressed("ui_down") and down_cast.is_colliding() == false:
+			#elif Input.is_action_just_pressed("RIB_DOWN") and down_cast.is_colliding() == false:
 				#movement(Vector2.DOWN)
-			#elif Input.is_action_just_pressed("ui_left") and left_cast.is_colliding() == false:
+			#elif Input.is_action_just_pressed("RIB_LEFT") and left_cast.is_colliding() == false:
 				#movement(Vector2.LEFT)
 		#
-		#if Input.is_action_just_pressed("ui_accept"):
+		#if Input.is_action_just_pressed("RIB_CROAK"):
 			#print("croak")
 			#croak()
 		#
@@ -198,8 +202,8 @@ func movement(dir : Vector2) -> void:
 	#print(buffer_box.area_entered)
 	#print(buffer_box.body_entered)
 	#
-	print(global_position)
-	print(buffer_box.global_position)
+	#print(global_position)
+	#print(buffer_box.global_position)
 	
 	await get_tree().physics_frame
 	

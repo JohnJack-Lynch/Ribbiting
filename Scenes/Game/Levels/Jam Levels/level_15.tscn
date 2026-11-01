@@ -52,10 +52,10 @@ position = Vector2(96, 96)
 blockade_direction = 1
 blockade_length = 2
 
-[node name="Rock" parent="Blockade" unique_id=666286791 instance=ExtResource("8_36nk0")]
+[node name="Rock" type="StaticBody2D" parent="Blockade" unique_id=666286791 instance=ExtResource("8_36nk0")]
 position = Vector2(8, 8)
 
-[node name="@StaticBody2D@232684" parent="Blockade" unique_id=1427285644 instance=ExtResource("8_36nk0")]
+[node name="@StaticBody2D@102722" type="StaticBody2D" parent="Blockade" unique_id=1334757783 instance=ExtResource("8_36nk0")]
 position = Vector2(8, 24)
 
 [node name="CroakSwitch" parent="." unique_id=2019649247 instance=ExtResource("5_43aqs")]

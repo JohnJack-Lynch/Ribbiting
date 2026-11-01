@@ -64,13 +64,13 @@ position = Vector2(24, 8)
 position = Vector2(80, 96)
 blockade_length = 3
 
-[node name="Rock" parent="Blockade" unique_id=666286791 instance=ExtResource("4_v2crd")]
+[node name="Rock" type="StaticBody2D" parent="Blockade" unique_id=666286791 instance=ExtResource("4_v2crd")]
 position = Vector2(8, 8)
 
-[node name="@StaticBody2D@224622" parent="Blockade" unique_id=889509882 instance=ExtResource("4_v2crd")]
+[node name="@StaticBody2D@100388" type="StaticBody2D" parent="Blockade" unique_id=1394896717 instance=ExtResource("4_v2crd")]
 position = Vector2(24, 8)
 
-[node name="@StaticBody2D@224623" parent="Blockade" unique_id=626315989 instance=ExtResource("4_v2crd")]
+[node name="@StaticBody2D@100389" type="StaticBody2D" parent="Blockade" unique_id=202473652 instance=ExtResource("4_v2crd")]
 position = Vector2(40, 8)
 
 [node name="BlockadeController" type="Node" parent="." unique_id=99772023 node_paths=PackedStringArray("blockade")]

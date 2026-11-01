@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c16slr4scdi2g"]
 
 [ext_resource type="Texture2D" uid="uid://bocsd7k2xgq04" path="res://Assets/Sprites/Environments/spr_blockade.png" id="1_ej32p"]
+[ext_resource type="PackedScene" uid="uid://y0nxaorqv17c" path="res://Scenes/Game/Common/clip_check.tscn" id="2_qjgwc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7schq"]
 size = Vector2(16, 16)
@@ -13,3 +14,5 @@ texture = ExtResource("1_ej32p")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=782912715]
 shape = SubResource("RectangleShape2D_7schq")
 debug_color = Color(0.7554421, 0.45485723, 0, 0.41960785)
+
+[node name="ClipCheck" parent="." unique_id=1099121456 instance=ExtResource("2_qjgwc")]

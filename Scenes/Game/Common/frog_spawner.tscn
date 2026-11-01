@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://clqobxdmvasjt"]
+
+[ext_resource type="Script" uid="uid://cvdnayby5doqr" path="res://Scenes/Game/Common/Scripts/spawner.gd" id="1_lsf8u"]
+[ext_resource type="Texture2D" uid="uid://d1h5lm8wees83" path="res://Assets/Sprites/Characters/spr_frog_player.png" id="2_itxfv"]
+[ext_resource type="Texture2D" uid="uid://bmi6ruxciapvm" path="res://Assets/Sprites/Characters/spr_frog_mean.png" id="3_3x7xm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsf8u"]
+atlas = ExtResource("2_itxfv")
+region = Rect2(0, 0, 18, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnc7b"]
+atlas = ExtResource("3_3x7xm")
+region = Rect2(0, 0, 18, 0)
+
+[node name="FrogSpawner" type="Marker2D" unique_id=1720202286]
+script = ExtResource("1_lsf8u")
+frog_textures = Array[AtlasTexture]([SubResource("AtlasTexture_lsf8u"), SubResource("AtlasTexture_fnc7b")])
+
+[node name="PreviewTexture" type="Sprite2D" parent="." unique_id=75823387]
+unique_name_in_owner = true

@@ -48,7 +48,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_cj6ld"]
 resource_name = "WipeIn"
-length = 1.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -72,7 +71,7 @@ tracks/0/path = NodePath("ColorRect:material:shader_parameter/progress")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.3, 1.1),
+"times": PackedFloat32Array(0.13333334, 0.9333334),
 "transitions": PackedFloat32Array(0.28717458, 2.0000005),
 "update": 0,
 "values": [0.0, 2.0]
