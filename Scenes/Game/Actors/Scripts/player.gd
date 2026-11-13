@@ -5,17 +5,20 @@ enum States {
 	ACTIVE,
 	CROAK,
 	SNOOZE,
-	WIN
+	WIN,
+	KILL
 }
 
-#enum FrogMode {
-	#BASIC,
-	#MEAN
-#}
+enum FrogMode {
+	BASIC,
+	MEAN
+}
 
-#@export var mode : FrogMode
-@export var is_mean : bool = false
+@export var mode : FrogMode
+
 @export var active : bool = false
+
+@export var is_mean : bool = false
 
 @export_group("Overrides")
 @export var entry_state : States
@@ -55,12 +58,19 @@ const TILE_SIZE : Vector2 = Vector2(16,16)
 @onready var hop_snd: AudioStreamPlayer2D = $HopSnd
 @onready var croak_snd: AudioStreamPlayer2D = $CroakSnd
 
+@onready var snooze_particles: GPUParticles2D = $SnoozeParticles
 
 func _ready() -> void:
 	if active == false:
 		switch_state(States.SNOOZE)
 	else:
 		add_to_group("ActiveFrog")
+	
+	match mode:
+		FrogMode.BASIC:
+			is_mean = false
+		FrogMode.MEAN:
+			is_mean = true
 	
 	#croak_box.set_deferred("monitoring", false)
 	
@@ -73,7 +83,7 @@ func _ready() -> void:
 	#croak_box.area_entered.connect(_on_detect_switch)
 
 func _process(delta: float) -> void:
-	pass
+	snooze_particles.emitting = !active
 
 func _physics_process(delta: float) -> void:
 	croak_box.visible = active
@@ -157,6 +167,9 @@ func _physics_process(delta: float) -> void:
 				anim.play("Snooze")
 		States.WIN:
 			pass
+		States.KILL:
+			sprite.visible = false
+			collision_shape_2d.disabled = true
 	
 	#if active == true:
 		#if !spr_pos_tween or !spr_pos_tween.is_running():

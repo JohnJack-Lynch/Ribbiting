@@ -4,8 +4,38 @@
 [ext_resource type="Texture2D" uid="uid://bmi6ruxciapvm" path="res://Assets/Sprites/Characters/spr_frog_mean.png" id="2_f80dg"]
 [ext_resource type="PackedScene" uid="uid://dy08bbmynm4o8" path="res://Scenes/Game/Common/echo_ring_m.tscn" id="2_jhy3l"]
 [ext_resource type="Script" uid="uid://donj8fxvegd43" path="res://_util/sprite_flipper_2d.gd" id="3_po2y6"]
+[ext_resource type="Texture2D" uid="uid://cc4ek85o0wnb3" path="res://Assets/Sprites/spr_snooze_particle.png" id="3_yqnnb"]
 [ext_resource type="AudioStream" uid="uid://ct42ejgmfcgyg" path="res://Assets/Audio/SFX/snd_hop.wav" id="4_po2y6"]
 [ext_resource type="AudioStream" uid="uid://chw032dkqfqbu" path="res://Assets/Audio/SFX/snd_croak.wav" id="5_11awk"]
+
+[sub_resource type="Curve" id="Curve_fpvp0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0909091, 1), 0.0, 0.0, 0, 0, Vector2(0.51196176, 0.5393259), 0.0, 0.0, 0, 0, Vector2(0.7129187, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_qxbr5"]
+curve = SubResource("Curve_fpvp0")
+
+[sub_resource type="Curve" id="Curve_cjdfo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.15789476, 0.59550565), 0.0, 0.0, 0, 0, Vector2(0.3205742, 0.75280905), 1.1440506, 1.1440506, 0, 0, Vector2(0.5167464, 0.50561804), 0.0, 0.0, 0, 0, Vector2(0.77033496, 0.7191012), 0.0, 0.0, 0, 0, Vector2(0.8851675, 0.6516854), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="CurveTexture" id="CurveTexture_ivuhx"]
+curve = SubResource("Curve_cjdfo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2emn0"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 16.355
+flatness = 0.478
+initial_velocity_min = 17.14
+initial_velocity_max = 30.189999
+gravity = Vector3(0, 0, 0)
+damping_min = 8.52
+damping_max = 8.52
+scale_min = 0.7
+scale_max = 2.1
+scale_curve = SubResource("CurveTexture_ivuhx")
+alpha_curve = SubResource("CurveTexture_qxbr5")
 
 [sub_resource type="Gradient" id="Gradient_5agm6"]
 offsets = PackedFloat32Array(0, 0.6927711)
@@ -61,7 +91,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_xkm73"]
 resource_name = "Hop"
-length = 0.185
+length = 0.12
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -69,7 +99,7 @@ tracks/0/path = NodePath("Sprite2D:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.16666667),
+"times": PackedFloat32Array(0, 0.0642, 0.1141),
 "transitions": PackedFloat32Array(0.34151012, 1, 1),
 "update": 0,
 "values": [Vector2(0, -3), Vector2(0, -10.365), Vector2(0, -3)]
@@ -206,7 +236,7 @@ tracks/2/keys = {
 "values": [Vector2(0, -3), Vector2(0, -3)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f80dg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jhy3l"]
 _data = {
 &"Croak": SubResource("Animation_mgrlc"),
 &"Hop": SubResource("Animation_xkm73"),
@@ -375,6 +405,7 @@ collision_mask = 7
 script = ExtResource("1_1ro4c")
 mode = 1
 is_mean = true
+tween_time = 0.12
 echo_effect = ExtResource("2_jhy3l")
 anim = NodePath("AnimationPlayer")
 sprite = NodePath("Sprite2D")
@@ -384,11 +415,19 @@ croak_box = NodePath("CroakBox")
 blink_timer = NodePath("BlinkTimer")
 metadata/_custom_type_script = "uid://b2ycipxsgbuif"
 
+[node name="SnoozeParticles" type="GPUParticles2D" parent="." unique_id=1906758738]
+emitting = false
+amount = 2
+texture = ExtResource("3_yqnnb")
+lifetime = 3.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_2emn0")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1980159011]
 texture_filter = 1
 texture = ExtResource("2_f80dg")
 offset = Vector2(0, -3)
-hframes = 13
+hframes = 16
 
 [node name="PointLight2D" type="PointLight2D" parent="Sprite2D" unique_id=31517816]
 position = Vector2(0, -4)
@@ -404,8 +443,8 @@ metadata/_custom_type_script = "uid://donj8fxvegd43"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2104284291]
 shape = SubResource("RectangleShape2D_jhy3l")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1106896038]
-libraries/ = SubResource("AnimationLibrary_f80dg")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1467392297]
+libraries/ = SubResource("AnimationLibrary_jhy3l")
 autoplay = &"Idle"
 next/Croak = &"Idle"
 

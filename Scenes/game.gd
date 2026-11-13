@@ -3,6 +3,14 @@
 class_name MainGame
 extends Node
 
+enum GameState {
+	WORLD_MAP,
+	GAME,
+	SCENE
+}
+
+var cur_game_state : GameState = GameState.WORLD_MAP
+
 var next_level : String = ""
 
 var player : Player = null
@@ -10,6 +18,9 @@ var win_zone : WinZone = null
 
 var cur_level : Level = null
 var cur_level_uid : String = ""
+
+var cur_map : WorldMap = null
+var cur_map_uid : String = ""
 
 var initializing : bool = true
 
@@ -21,7 +32,8 @@ const WIN_ZONE_SCENE_UID : String = "uid://mtc50o1t6q8f"
 #const MAIN_MENU_SCENE_UID : String = "uid://crh1erkfw5spn"
 const LEVEL_1_SCENE_UID : String = "uid://oey1hsl1xs8b"
 
-const WORLD_MAP_SCENE_UID : String = "uid://cugjaqj7ne4li"
+const MAP_PLAYER_SCENE_UID : String = "uid://cbujyts27bjul"
+const WORLD_1_MAP_SCENE_UID : String = "uid://cugjaqj7ne4li"
 
 #const END_SCENE_UID : String = ""
 
@@ -172,6 +184,9 @@ func set_refresh_point(uid : String) -> void:
 		return
 	
 	cur_level_uid = uid
+
+func change_game_state(new_state : GameState) -> void:
+	cur_game_state = new_state
 
 #func load_end_scene() -> void:
 	#if player!= null:

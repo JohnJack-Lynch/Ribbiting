@@ -2,5 +2,22 @@
 
 [ext_resource type="Script" uid="uid://crnpe4t4j8gu" path="res://Scenes/UI/Menus/Components/Scripts/map_route.gd" id="1_owpth"]
 
-[node name="MapRoute" type="Path2D" unique_id=1338425931]
+[node name="MapRoute" type="Path2D" unique_id=1338425931 node_paths=PackedStringArray("line", "drop_shadow")]
 script = ExtResource("1_owpth")
+enable_color = Color(0.99607843, 0.9529412, 0.7529412, 1)
+disable_color = Color(0.19607843, 0.16862746, 0.15686275, 1)
+line = NodePath("Line2D")
+drop_shadow = NodePath("Line2D2")
+
+[node name="Line2D2" type="Line2D" parent="." unique_id=1340036056]
+position = Vector2(0, 1)
+closed = true
+width = 4.0
+default_color = Color(0.13333334, 0.10980392, 0.101960786, 1)
+joint_mode = 2
+
+[node name="Line2D" type="Line2D" parent="." unique_id=751993064]
+closed = true
+width = 3.0
+default_color = Color(0.99607843, 0.9529412, 0.7529412, 1)
+joint_mode = 2

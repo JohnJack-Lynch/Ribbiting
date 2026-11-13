@@ -3,16 +3,47 @@
 [ext_resource type="Script" uid="uid://b2ycipxsgbuif" path="res://Scenes/Game/Actors/Scripts/player.gd" id="1_8dgkj"]
 [ext_resource type="Texture2D" uid="uid://d1h5lm8wees83" path="res://Assets/Sprites/Characters/spr_frog_player.png" id="1_m4yhv"]
 [ext_resource type="PackedScene" uid="uid://cepydja7totc7" path="res://Scenes/Game/Common/echo_ring_g.tscn" id="2_xtns2"]
+[ext_resource type="Texture2D" uid="uid://cc4ek85o0wnb3" path="res://Assets/Sprites/spr_snooze_particle.png" id="3_02jef"]
 [ext_resource type="Script" uid="uid://donj8fxvegd43" path="res://_util/sprite_flipper_2d.gd" id="3_5agm6"]
 [ext_resource type="AudioStream" uid="uid://ct42ejgmfcgyg" path="res://Assets/Audio/SFX/snd_hop.wav" id="4_wkxp7"]
+[ext_resource type="Script" uid="uid://bbfngoc035g7f" path="res://Scenes/Game/Common/Scripts/sprite_swapper.gd" id="5_ryasx"]
 [ext_resource type="AudioStream" uid="uid://chw032dkqfqbu" path="res://Assets/Audio/SFX/snd_croak.wav" id="5_vao4o"]
 
-[sub_resource type="Gradient" id="Gradient_02jef"]
+[sub_resource type="Curve" id="Curve_i8b8h"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.35406703, 1), 0.0, 0.0, 0, 0, Vector2(0.90430623, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_02jef"]
+curve = SubResource("Curve_i8b8h")
+
+[sub_resource type="Curve" id="Curve_ryasx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.15789476, 0.59550565), 0.0, 0.0, 0, 0, Vector2(0.3205742, 0.75280905), 1.1440506, 1.1440506, 0, 0, Vector2(0.5167464, 0.50561804), 0.0, 0.0, 0, 0, Vector2(0.77033496, 0.7191012), 0.0, 0.0, 0, 0, Vector2(0.8851675, 0.6516854), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="CurveTexture" id="CurveTexture_ryasx"]
+curve = SubResource("Curve_ryasx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7schq"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 16.355
+flatness = 0.478
+initial_velocity_min = 17.14
+initial_velocity_max = 30.189999
+gravity = Vector3(0, 0, 0)
+damping_min = 8.52
+damping_max = 8.52
+scale_min = 0.7
+scale_max = 2.1
+scale_curve = SubResource("CurveTexture_ryasx")
+alpha_curve = SubResource("CurveTexture_02jef")
+
+[sub_resource type="Gradient" id="Gradient_mgrlc"]
 offsets = PackedFloat32Array(0, 0.6927711)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7schq"]
-gradient = SubResource("Gradient_02jef")
+gradient = SubResource("Gradient_mgrlc")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -61,7 +92,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_xkm73"]
 resource_name = "Hop"
-length = 0.185
+length = 0.12
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -69,7 +100,7 @@ tracks/0/path = NodePath("Sprite2D:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.16666667),
+"times": PackedFloat32Array(0, 0.0642, 0.1141),
 "transitions": PackedFloat32Array(0.34151012, 1, 1),
 "update": 0,
 "values": [Vector2(0, -3), Vector2(0, -10.365), Vector2(0, -3)]
@@ -230,7 +261,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3, 0.4, 0.79999995, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
+"values": [1, 2, 3, 4, 5, 6, 7]
 }
 
 [sub_resource type="Animation" id="Animation_8dgkj"]
@@ -247,7 +278,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [7, 8, 9, 10]
+"values": [8, 9, 10, 11]
 }
 
 [sub_resource type="Animation" id="Animation_5agm6"]
@@ -294,7 +325,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [12]
 }
 
 [sub_resource type="Animation" id="Animation_xtns2"]
@@ -311,7 +342,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.099999994, 0.2, 0.30001),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [4, 5, 6, 0]
+"values": [12, 13, 14, 0]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -370,6 +401,7 @@ stream_0/stream = ExtResource("5_vao4o")
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_8dgkj")
+tween_time = 0.12
 echo_effect = ExtResource("2_xtns2")
 anim = NodePath("AnimationPlayer")
 sprite = NodePath("Sprite2D")
@@ -378,11 +410,20 @@ buffer_box = NodePath("BufferBox")
 croak_box = NodePath("CroakBox")
 blink_timer = NodePath("BlinkTimer")
 
+[node name="SnoozeParticles" type="GPUParticles2D" parent="." unique_id=1317042483]
+emitting = false
+amount = 2
+texture = ExtResource("3_02jef")
+lifetime = 3.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_7schq")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1752168150]
 texture_filter = 1
 texture = ExtResource("1_m4yhv")
 offset = Vector2(0, -3)
-hframes = 11
+hframes = 16
+script = ExtResource("5_ryasx")
 
 [node name="PointLight2D" type="PointLight2D" parent="Sprite2D" unique_id=343017549]
 position = Vector2(0, -4)
@@ -440,6 +481,7 @@ collision_mask = 64
 shape = SubResource("RectangleShape2D_7schq")
 
 [node name="CroakBox" type="Area2D" parent="." unique_id=1916165241]
+visible = false
 collision_layer = 0
 collision_mask = 34
 

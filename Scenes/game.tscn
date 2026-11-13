@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://f35ljfysvant" path="res://Assets/Audio/SFX/snd_amb_swamp.ogg" id="2_qxrlw"]
 [ext_resource type="AudioStream" uid="uid://xespvuii8aqg" path="res://Assets/Audio/Music/mus_froglullaby.ogg" id="2_wrm1d"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qxbr5"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wrm1d"]
 light_mode = 1
 
 [sub_resource type="Curve" id="Curve_3dryh"]
@@ -14,11 +14,11 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_wrm1d"]
 curve = SubResource("Curve_3dryh")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wrm1d"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wowpa"]
 particle_flag_align_y = true
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(125.385, 84.715, 1)
+emission_box_extents = Vector3(328.435, 193.545, 1)
 gravity = Vector3(0, -1, 0)
 tangential_accel_min = -1.5000021
 tangential_accel_max = 1.5499977
@@ -40,30 +40,39 @@ script = ExtResource("1_ebmjs")
 color = Color(0.40069774, 0.40069774, 0.40069768, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="World/EffectRoot" unique_id=880747667]
+offset = Vector2(-224, -108)
+transform = Transform2D(1, 0, 0, 1, -224, -108)
+follow_viewport_enabled = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="World/EffectRoot/CanvasLayer" unique_id=1241014709]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="World/EffectRoot/CanvasLayer/SubViewportContainer" unique_id=560596168]
+[node name="SubViewport" type="SubViewport" parent="World/EffectRoot/CanvasLayer/SubViewportContainer" unique_id=2137031704]
 transparent_bg = true
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
-size = Vector2i(192, 144)
-size_2d_override = Vector2i(192, 144)
+size = Vector2i(640, 360)
+size_2d_override = Vector2i(640, 360)
 render_target_update_mode = 4
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="World/EffectRoot/CanvasLayer/SubViewportContainer/SubViewport" unique_id=547482989]
-material = SubResource("CanvasItemMaterial_qxbr5")
-position = Vector2(96, 72)
+[node name="GPUParticles2D" type="GPUParticles2D" parent="World/EffectRoot/CanvasLayer/SubViewportContainer/SubViewport" unique_id=815165629]
+material = SubResource("CanvasItemMaterial_wrm1d")
+position = Vector2(336, 194)
+amount = 14
 lifetime = 3.22
 preprocess = 10.0
 randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_wrm1d")
+process_material = SubResource("ParticleProcessMaterial_wowpa")
 
 [node name="Camera2D" type="Camera2D" parent="World" unique_id=1767962208]
 offset = Vector2(96, 72)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 editor_draw_limits = true
 
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=2097572928]

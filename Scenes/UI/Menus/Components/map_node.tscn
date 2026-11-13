@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cibxo0jolaqhj"]
 
 [ext_resource type="Script" uid="uid://b16ybu5p66jm6" path="res://Scenes/UI/Menus/Components/Scripts/map_node.gd" id="1_snr15"]
+[ext_resource type="PackedScene" uid="uid://3hhurhried7p" path="res://Scenes/UI/HUD/Components/level_bubble.tscn" id="2_cor2r"]
+[ext_resource type="Texture2D" uid="uid://jl4eawc14vas" path="res://Assets/Sprites/UI/spr_map_blank.png" id="2_d66gs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7schq"]
 size = Vector2(16, 16)
@@ -14,19 +16,37 @@ gradient = SubResource("Gradient_snr15")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="MapNode" type="Node2D" unique_id=1577631537 groups=["MapNodes"]]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ivuhx"]
+light_mode = 1
+
+[node name="MapNode" type="Node2D" unique_id=1577631537 node_paths=PackedStringArray("cursor_check", "level_bubble") groups=["MapNodes"]]
+z_index = 1
 script = ExtResource("1_snr15")
+cursor_check = NodePath("Area2D")
+level_bubble = NodePath("Node2D/LevelBubble")
+metadata/_edit_vertical_guides_ = [74.0]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1117132698]
+position = Vector2(74, 83)
+texture = ExtResource("2_d66gs")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1753724233]
-position = Vector2(0, -8)
+position = Vector2(74, 80)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1075598427]
 shape = SubResource("RectangleShape2D_7schq")
 debug_color = Color(1.92523e-07, 0.63812083, 0.38721114, 0.41960785)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1117132698]
-offset = Vector2(0, -8)
-
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1213099881]
+position = Vector2(74, 80)
+enabled = false
 texture = SubResource("GradientTexture2D_cor2r")
 offset = Vector2(0, -8)
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1523260411]
+material = SubResource("CanvasItemMaterial_ivuhx")
+
+[node name="LevelBubble" parent="Node2D" unique_id=1182789858 instance=ExtResource("2_cor2r")]
+z_index = 1
+use_parent_material = true
+anchors_preset = -1
