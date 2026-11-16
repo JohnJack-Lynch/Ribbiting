@@ -1,6 +1,8 @@
 class_name WorldMap
 extends Node2D
 
+@export var default_player_pos : Vector2
+
 var map_nodes : Array
 
 # Called when the node enters the scene tree for the first time.

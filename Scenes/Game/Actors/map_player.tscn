@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://clwqru21dglfb" path="res://Scenes/Game/Actors/Scripts/map_player.gd" id="1_hw7ou"]
 [ext_resource type="Texture2D" uid="uid://d1h5lm8wees83" path="res://Assets/Sprites/Characters/spr_frog_player.png" id="1_stfrr"]
 [ext_resource type="AudioStream" uid="uid://ct42ejgmfcgyg" path="res://Assets/Audio/SFX/snd_hop.wav" id="2_hw7ou"]
+[ext_resource type="AudioStream" uid="uid://chw032dkqfqbu" path="res://Assets/Audio/SFX/snd_croak.wav" id="4_0wte0"]
 
 [sub_resource type="Gradient" id="Gradient_02jef"]
 offsets = PackedFloat32Array(0, 0.6927711)
@@ -16,9 +17,14 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ekrbs"]
 size = Vector2(8, 8)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ekrbs"]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("4_0wte0")
+
 [sub_resource type="Animation" id="Animation_mgrlc"]
 resource_name = "Croak"
-length = 0.4
+length = 1.6666666
 tracks/0/type = "animation"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -55,6 +61,21 @@ tracks/2/keys = {
 "method": &"spawn_ring"
 }]
 }
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CroakSnd")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamRandomizer_ekrbs")
+}],
+"times": PackedFloat32Array(0.13333334)
+}
+tracks/3/use_blend = true
 
 [sub_resource type="Animation" id="Animation_xkm73"]
 resource_name = "Hop"
@@ -227,7 +248,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3, 0.4, 0.79999995, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
+"values": [0, 1, 2, 3, 4, 6, 7]
 }
 
 [sub_resource type="Animation" id="Animation_8dgkj"]
@@ -244,7 +265,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [7, 8, 9, 10]
+"values": [8, 9, 10, 11]
 }
 
 [sub_resource type="Animation" id="Animation_5agm6"]
@@ -381,12 +402,10 @@ shape = SubResource("RectangleShape2D_ekrbs")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1242333783]
 libraries/ = SubResource("AnimationLibrary_t00i7")
 autoplay = &"Idle"
-next/Croak = &"Idle"
 
 [node name="SprAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1270093599]
 libraries/ = SubResource("AnimationLibrary_6nj8l")
 next/Blink = &"Idle"
-next/Croak = &"Idle"
 
 [node name="UpCast" type="RayCast2D" parent="." unique_id=1643838316]
 position = Vector2(0, -8)
@@ -421,4 +440,8 @@ shape = SubResource("RectangleShape2D_ekrbs")
 
 [node name="HopSnd" type="AudioStreamPlayer2D" parent="." unique_id=134691193]
 stream = SubResource("AudioStreamRandomizer_ccm7o")
+bus = &"SFX"
+
+[node name="CroakSnd" type="AudioStreamPlayer2D" parent="." unique_id=1742303954]
+volume_db = 1.855
 bus = &"SFX"

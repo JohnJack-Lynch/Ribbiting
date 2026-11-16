@@ -19,6 +19,8 @@ enum NavStates {
 
 var on_node : bool = false
 
+var cur_map_node : MapNode
+
 var state : NavStates
 
 var spr_pos_tween : Tween
@@ -33,6 +35,7 @@ const TILE_SIZE : Vector2 = Vector2(16,16)
 @onready var left_cast: RayCast2D = $LeftCast
 
 @onready var hop_snd: AudioStreamPlayer2D = $HopSnd
+@onready var croak_snd: AudioStreamPlayer2D = $CroakSnd
 
 func _physics_process(delta: float) -> void:
 	match state:
@@ -55,6 +58,18 @@ func _physics_process(delta: float) -> void:
 		NavStates.HOVER:
 			pass
 
+func _unhandled_input(event: InputEvent) -> void:
+	if cur_map_node != null:
+		if Input.is_action_just_pressed("RIB_CROAK"):
+			switch_state(NavStates.HOVER)
+			anim.play("Croak")
+			
+
+	
+	
+func switch_state(new_state : NavStates) -> void:
+	state = new_state
+
 func movement(dir : Vector2) -> void:
 	#var buffer_box_check# := buffer_box.get_overlapping_areas()
 	
@@ -70,8 +85,6 @@ func movement(dir : Vector2) -> void:
 	#print(buffer_box.global_position)
 	
 	await get_tree().physics_frame
-	
-	print(check_next_tile())
 	
 	if check_next_tile() == true:
 		if spr_pos_tween:
@@ -106,10 +119,6 @@ func check_next_tile() -> bool: # checks to see if the targeted tile will be occ
 	# if true, self moves
 	# if false, other frog(s) move
 	var buffer_box_check := buffer_box.get_overlapping_areas()
-	
-	
-	
-	print(buffer_box_check)
 	
 	
 	

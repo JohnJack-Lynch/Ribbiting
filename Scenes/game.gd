@@ -20,7 +20,9 @@ var cur_level : Level = null
 var cur_level_uid : String = ""
 
 var cur_map : WorldMap = null
+var map_player : MapPlayer = null
 var cur_map_uid : String = ""
+var cur_node_pos : Vector2 = Vector2.ZERO
 
 var initializing : bool = true
 
@@ -37,6 +39,7 @@ const WORLD_1_MAP_SCENE_UID : String = "uid://cugjaqj7ne4li"
 
 #const END_SCENE_UID : String = ""
 
+@onready var map_root: Node2D = $World/MapRoot
 @onready var level_root: Node2D = $World/LevelRoot
 @onready var entity_root: Node2D = $World/EntityRoot
 @onready var effect_root: Node2D = $World/EffectRoot
@@ -46,12 +49,22 @@ const WORLD_1_MAP_SCENE_UID : String = "uid://cugjaqj7ne4li"
 
 @onready var music: AudioStreamPlayer = $Music
 
+@onready var map_cam: MapCam = $World/MapCam
+@onready var game_cam: Camera2D = $World/GameCam
+
+signal game_state_changed(new_state : GameState)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	init_player()
 	
 	load_level(LEVEL_1_SCENE_UID)
+	load_scene(WORLD_1_MAP_SCENE_UID, deferred_load_map)
+	
 	initializing = false
+	
+	check_game_state(cur_game_state)
+	
 	Fader.animation_player.play("WipeOut")
 	
 	if mus_tween:
@@ -61,6 +74,8 @@ func _ready() -> void:
 	mus_tween.tween_property(music, "volume_db", -4.5, 8.0)
 	
 	SignalBus.refresh_level.connect(_on_refresh_level)
+	
+	game_state_changed.connect(_on_game_state_changed)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("RIB_RESET") and !Fader.animation_player.is_playing():
@@ -68,19 +83,31 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func init_player() -> void:
 	var player_inst : PackedScene = ResourceLoader.load(PLAYER_SCENE_UID) as PackedScene
+	var map_player_inst : PackedScene = ResourceLoader.load(MAP_PLAYER_SCENE_UID) as PackedScene
 	
 	if player_inst == null:
 		push_error("Could not load player scene " + PLAYER_SCENE_UID)
 		return
 	
+	if map_player_inst == null:
+		push_error("Could not load map player scene " + MAP_PLAYER_SCENE_UID)
+		return
+	
 	player = player_inst.instantiate() as Player
+	map_player = map_player_inst.instantiate() as MapPlayer
 	
 	if player == null:
 		push_error("Loaded player scene does not extend Player or does not exist " + PLAYER_SCENE_UID)
 		return
 	
+	if map_player == null:
+		push_error("Loaded map player scene does not extend MapPlayer or does not exist " + MAP_PLAYER_SCENE_UID)
+		return
+	
 	player.active = true
+	
 	entity_root.add_child(player)
+	entity_root.add_child(map_player)
 
 func set_win_zone() -> void:
 	var win_zone_inst : PackedScene = ResourceLoader.load(WIN_ZONE_SCENE_UID) as PackedScene
@@ -149,6 +176,37 @@ func deferred_load_level(level_uid : String) -> void:
 	place_win_zone()
 	set_win_zone_layers()
 
+func load_scene(target_scene : String, deferred_call : Callable) -> void:
+	if initializing == false:
+		Fader.animation_player.play("WipeIn")
+		
+		await Fader.animation_player.animation_finished
+	
+	deferred_call.call_deferred(target_scene)
+	
+	Fader.animation_player.play("WipeOut")
+
+func deferred_load_map(map_uid : String) -> void:
+	if cur_map != null:
+		cur_map.queue_free()
+		cur_map = null
+	
+	await get_tree().process_frame
+	
+	var new_map_inst : PackedScene = ResourceLoader.load(map_uid, "PackedScene") as PackedScene
+	
+	if new_map_inst == null:
+		push_error("Could not load map as PackedScene " + map_uid)
+		return
+	
+	cur_map = new_map_inst.instantiate() as WorldMap
+	
+	if cur_map == null:
+		push_error("Loaded map is not of type WorldMap or does not exist")
+		return
+	
+	map_root.add_child(cur_map)
+
 func place_player_in_init_pos() -> void:
 	if player == null:
 		push_error("Cannot place player, player is null")
@@ -187,6 +245,68 @@ func set_refresh_point(uid : String) -> void:
 
 func change_game_state(new_state : GameState) -> void:
 	cur_game_state = new_state
+	game_state_changed.emit(new_state)
+
+func check_game_state(s : GameState) -> void:
+	match s:
+		
+		GameState.WORLD_MAP:
+			if map_player:
+				print("has map player")
+				map_player.process_mode = Node.PROCESS_MODE_INHERIT
+				map_player.show()
+				
+				map_player.switch_state(map_player.NavStates.MOVE)
+			
+			#if cur_map:
+				#print("has map")
+				#cur_map.process_mode = Node.PROCESS_MODE_INHERIT
+				#cur_map.show()
+			map_root.process_mode = Node.PROCESS_MODE_INHERIT
+			map_root.show()
+			
+			if player:
+				print("has player")
+				player.process_mode = Node.PROCESS_MODE_DISABLED
+				player.hide()
+			
+			#if cur_level:
+				#print("has level")
+				#cur_level.process_mode = Node.PROCESS_MODE_DISABLED
+				#cur_level.hide()
+			
+			level_root.process_mode = Node.PROCESS_MODE_DISABLED
+			level_root.hide()
+			
+			map_cam.enabled = true
+			game_cam.enabled = false
+		GameState.GAME:
+			if player:
+				player.process_mode =Node.PROCESS_MODE_INHERIT
+				player.show()
+			
+			#if cur_level:
+				#cur_level.process_mode =Node.PROCESS_MODE_INHERIT
+				#cur_level.show()
+			
+			level_root.process_mode = Node.PROCESS_MODE_INHERIT
+			level_root.show()
+			
+			if map_player:
+				map_player.process_mode = Node.PROCESS_MODE_DISABLED
+				map_player.hide()
+			
+			#if cur_map:
+				#cur_map.process_mode = Node.PROCESS_MODE_DISABLED
+				#cur_map.hide()
+			
+			map_root.process_mode = Node.PROCESS_MODE_DISABLED
+			map_root.hide()
+			
+			map_cam.enabled = false
+			game_cam.enabled = true
+		GameState.SCENE:
+			pass
 
 #func load_end_scene() -> void:
 	#if player!= null:
@@ -203,7 +323,7 @@ func change_game_state(new_state : GameState) -> void:
 	#
 	#await get_tree().process_frame
 
-
+# for when the player enters the win zone
 func _on_player_enter(body : Node2D) -> void:
 	print("body entered")
 	print(body)
@@ -249,3 +369,6 @@ func _on_refresh_level() -> void:
 	
 	load_level(cur_level_uid)
 	initializing = false
+
+func _on_game_state_changed(new_state : GameState) -> void:
+	check_game_state(new_state)
