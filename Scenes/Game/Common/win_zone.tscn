@@ -91,7 +91,39 @@ animations = [{
 }],
 "loop": 1,
 "name": &"default",
-"speed": 3.0
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3rre"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h43ah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3rre")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_668wc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsca4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwda1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od4nj")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od4nj")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
 }]
 
 [sub_resource type="Gradient" id="Gradient_5agm6"]
@@ -121,6 +153,10 @@ frame_progress = 0.6627945
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=454499394]
 sprite_frames = SubResource("SpriteFrames_h43ah")
+autoplay = "default"
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="." unique_id=887208352]
+sprite_frames = SubResource("SpriteFrames_x3rre")
 autoplay = "default"
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1704719550]

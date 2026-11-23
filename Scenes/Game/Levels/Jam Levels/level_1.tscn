@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bj74kmv015783" path="res://Scenes/Game/Common/Scripts/level.gd" id="1_w6qyb"]
 [ext_resource type="TileSet" uid="uid://dflqef88pgl6c" path="res://Resources/Common/main_tiles.tres" id="2_3wyah"]
+[ext_resource type="Script" uid="uid://cpyffqmhchcws" path="res://Resources/Scripts/level_res.gd" id="2_cvqmq"]
 [ext_resource type="Texture2D" uid="uid://c3mvtw4cwaurg" path="res://Assets/Sprites/spr_tutorial.png" id="4_lnbw1"]
+
+[sub_resource type="Resource" id="Resource_65clx"]
+script = ExtResource("2_cvqmq")
+metadata/_custom_type_script = "uid://cpyffqmhchcws"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w6qyb"]
 atlas = ExtResource("4_lnbw1")
@@ -107,6 +112,7 @@ _data = {
 
 [node name="Level1" type="Node2D" unique_id=1161222746]
 script = ExtResource("1_w6qyb")
+level_data = SubResource("Resource_65clx")
 next_level_uid = "uid://b5e4q8d0i7tpx"
 player_spawn = Vector2(32, 64)
 win_zone_pos = Vector2(144, 64)

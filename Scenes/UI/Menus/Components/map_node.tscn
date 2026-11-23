@@ -45,14 +45,15 @@ debug_color = Color(1.92523e-07, 0.63812083, 0.38721114, 0.41960785)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1213099881]
 position = Vector2(74, 80)
-enabled = false
 texture = SubResource("GradientTexture2D_cor2r")
 offset = Vector2(0, -8)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1523260411]
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_emg5j")
 
 [node name="LevelBubble" parent="Node2D" unique_id=1182789858 instance=ExtResource("2_cor2r")]
-z_index = 1
+z_index = 0
+y_sort_enabled = true
 use_parent_material = true
 anchors_preset = -1

@@ -37,6 +37,9 @@ const TILE_SIZE : Vector2 = Vector2(16,16)
 @onready var hop_snd: AudioStreamPlayer2D = $HopSnd
 @onready var croak_snd: AudioStreamPlayer2D = $CroakSnd
 
+func _ready() -> void:
+	SignalBus.reenable_node.connect(_on_reenable)
+
 func _physics_process(delta: float) -> void:
 	match state:
 		NavStates.MOVE:
@@ -63,10 +66,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("RIB_CROAK"):
 			switch_state(NavStates.HOVER)
 			anim.play("Croak")
+			#await anim.animation_finished
 			
+			SignalBus.go_to_level.emit(cur_map_node.level_data.level_uid)
 
-	
-	
 func switch_state(new_state : NavStates) -> void:
 	state = new_state
 
@@ -137,3 +140,16 @@ func check_next_tile() -> bool: # checks to see if the targeted tile will be occ
 				break
 	
 	return true
+
+func set_processes(enabled : bool) -> void:
+	print("processes set")
+	set_process(enabled)
+	set_physics_process(enabled)
+
+
+func _on_reenable(game_state : int) -> void:
+	if game_state == 0:
+		print("reenabled " + name)
+		process_mode = Node.PROCESS_MODE_INHERIT
+		switch_state(NavStates.MOVE)
+		show()

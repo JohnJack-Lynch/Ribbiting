@@ -32,6 +32,7 @@ var camera : MapCam
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var point_light_2d: PointLight2D = $PointLight2D
+@onready var area_2d: Area2D = $Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -45,6 +46,8 @@ func _ready() -> void:
 			#level_bubble.visible = false
 		
 		camera = get_tree().get_first_node_in_group("Camera")
+	
+	SignalBus.reenable_node.connect(_on_reenable)
 	
 	cursor_check.body_entered.connect(_on_frog_entered)
 	cursor_check.body_exited.connect(_on_frog_exited)
@@ -86,3 +89,12 @@ func _on_frog_exited(body : Node2D) -> void:
 	#camera.force_zoom.emit()
 	camera.zoom_cam(Vector2.ONE)
 	level_bubble.anim.play("PopOut")
+
+func _on_reenable(game_state : int) -> void:
+	if game_state == 0:
+		print("reenabled " + name)
+		
+		area_2d.set_deferred("monitoring", true)
+	else:
+		print("disabled map node " + name)
+		area_2d.set_deferred("monitoring", false)

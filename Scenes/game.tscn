@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://6m7xub4tu4tq" path="res://Scenes/UI/Menus/Components/Scripts/map_cam.gd" id="2_3dryh"]
 [ext_resource type="AudioStream" uid="uid://f35ljfysvant" path="res://Assets/Audio/SFX/snd_amb_swamp.ogg" id="2_qxrlw"]
 [ext_resource type="AudioStream" uid="uid://xespvuii8aqg" path="res://Assets/Audio/Music/mus_froglullaby.ogg" id="2_wrm1d"]
+[ext_resource type="FontFile" uid="uid://bl5prjgomfad7" path="res://Assets/Fonts/Whacky_Joe.ttf" id="3_wowpa"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wrm1d"]
 light_mode = 1
@@ -74,6 +75,7 @@ process_material = SubResource("ParticleProcessMaterial_wowpa")
 
 [node name="MapCam" type="Camera2D" parent="World" unique_id=1767962208 groups=["Camera"]]
 enabled = false
+limit_bottom = 180
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 editor_draw_limits = true
@@ -92,6 +94,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="HUDLayer/HUDRoot" unique_id=1231422661]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_wowpa")
+theme_override_font_sizes/font_size = 28
+text = "CONGLATURATION"
+
+[node name="MenuRoot" type="Control" parent="HUDLayer" unique_id=301831188]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=2023885216]
 
