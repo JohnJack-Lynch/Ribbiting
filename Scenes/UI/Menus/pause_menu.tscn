@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://d2t4ijipwr8cg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7schq"]
+bg_color = Color(0, 0.2610244, 0.17012155, 0.24705882)
+
+[node name="PauseMenu" type="PanelContainer" unique_id=1041834322]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7schq")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=422369136]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=299451054]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=737912088]
+layout_mode = 2
+text = "PAUSE"
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer" unique_id=352244750]
+layout_mode = 2
+text = "RESUME"
+
+[node name="Button2" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1905404999]
+layout_mode = 2
+text = "RESTART LEVEL"
+
+[node name="Button3" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1995469246]
+layout_mode = 2
+text = "OPTIONS"
+
+[node name="Button4" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2144167021]
+layout_mode = 2
+text = "RETURN TO MAP"
+
+[node name="Button5" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1248488677]
+layout_mode = 2
+text = "RETURN TO MAIN MENU"

@@ -38,6 +38,7 @@ ActiveFrog=""
 Switches=""
 Frog=""
 MapNodes=""
+Camera=""
 
 [input]
 

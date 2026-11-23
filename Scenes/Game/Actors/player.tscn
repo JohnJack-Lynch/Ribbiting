@@ -411,6 +411,8 @@ croak_box = NodePath("CroakBox")
 blink_timer = NodePath("BlinkTimer")
 
 [node name="SnoozeParticles" type="GPUParticles2D" parent="." unique_id=1317042483]
+z_index = 1
+y_sort_enabled = true
 emitting = false
 amount = 2
 texture = ExtResource("3_02jef")

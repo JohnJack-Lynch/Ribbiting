@@ -1,4 +1,5 @@
 shader_type canvas_item;
+render_mode blend_mix,unshaded;
 
 uniform vec2 center = vec2(50.0, 50.0); // Set this to your polygon's center in local space.
 uniform float amplitude : hint_range(0.0, 1.0) = 0.1;

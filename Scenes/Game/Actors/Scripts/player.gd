@@ -79,6 +79,7 @@ func _ready() -> void:
 	if override_priority != 0:
 		priority = override_priority
 	
+	SignalBus.reenable_node.connect(_on_reenable)
 	#SignalBus.level_complete.connect(_on_level_complete)
 	#croak_box.area_entered.connect(_on_detect_switch)
 
@@ -335,7 +336,10 @@ func spawn_ring() -> void:
 	ring_inst.global_position = global_position
 	
 	get_parent().add_child(ring_inst)
-	
+
+func set_processes(enabled : bool) -> void:
+	set_process(enabled)
+	set_physics_process(enabled)
 
 func _on_anim_finished(anim_name : StringName) -> void:
 	if anim_name == "Croak":
@@ -350,6 +354,13 @@ func _on_anim_finished(anim_name : StringName) -> void:
 		croak_active = false
 		
 		SignalBus.refresh_frog_count.emit()
+
+func _on_reenable(game_state : int) -> void:
+	if game_state == 1:
+		print("reenabled " + name)
+		process_mode = Node.PROCESS_MODE_INHERIT
+		switch_state(States.ACTIVE)
+		show()
 
 #func _on_level_complete() -> void:
 	#set_physics_process(false)
